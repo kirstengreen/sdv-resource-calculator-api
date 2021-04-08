@@ -1,4 +1,7 @@
-from flask import Flask
+from flask import Flask, g
+from flask_cors import CORS
+import models
+from resources.craftable_items import craftable_items
 
 DEBUG = True
 PORT = 5000
@@ -7,10 +10,24 @@ PORT = 5000
 app = Flask(__name__)
 
 
-
 '''
 DB CONNECTION
 '''
+
+@app.before_request
+def before_request():
+    g.db = models.DATABASE
+    g.db.connect()
+
+
+@app.after_request
+def after_request(response):
+    g.db.close()
+    return response
+
+
+CORS(craftable_items, origins=['http://localhost:8080'], supports_credentials=True)
+app.register_blueprint(craftable_items, url_prefix='/api/v1/craftable-items')
 
 
 @app.route('/')
@@ -19,4 +36,6 @@ def index():
 
 
 if __name__ == '__main__':
+  models.initialize()
+  # models.createdb()
   app.run(debug=DEBUG, port=PORT)
