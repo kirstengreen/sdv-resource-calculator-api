@@ -1,4 +1,4 @@
-from peewee import CharField, DateTimeField, Model
+from peewee import CharField, DateTimeField, Model, DoesNotExist
 from playhouse.postgres_ext import PostgresqlExtDatabase, JSONField
 from datetime import datetime
 
