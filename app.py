@@ -30,11 +30,6 @@ CORS(craftable_item, origins=['http://localhost:8080'], supports_credentials=Tru
 app.register_blueprint(craftable_item, url_prefix='/api/v1/craftable-items')
 
 
-@app.route('/')
-def index():
-  return 'Hello World!'
-
-
 if __name__ == '__main__':
   models.initialize()
   # models.createdb()
