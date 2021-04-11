@@ -26,5 +26,5 @@ def get_all_caftable_items():
 def get_one_craftable_item(id):
     print(id, 'reserved word?')
     craftable_item = models.CraftableItems.get_by_id(id)
-    print(craftable_item.__dict__)
+    # print(craftable_item.__dict__)
     return jsonify(data=model_to_dict(craftable_item), status={"code": 200, "message": "Success"})
