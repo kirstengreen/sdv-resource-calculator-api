@@ -1,9 +1,16 @@
+import os
 from peewee import CharField, DateTimeField, Model, DoesNotExist
 from playhouse.postgres_ext import PostgresqlExtDatabase, JSONField
 from datetime import datetime
+from playhouse.db_url import connect
 
 
-DATABASE = PostgresqlExtDatabase('sdv_resource_calculator')
+# CONNECT TO DB
+if 'ON_HEROKU' in os.environ:
+  DATABASE = connect(os.environ.get('DATABASE_URL'))
+else: 
+  DATABASE = PostgresqlExtDatabase('sdv_resource_calculator')
+
 
 
 class CraftableItems(Model):

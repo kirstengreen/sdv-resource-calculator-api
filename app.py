@@ -1,3 +1,4 @@
+import os
 from flask import Flask, g
 from flask_cors import CORS
 import models
@@ -28,6 +29,10 @@ def after_request(response):
 
 CORS(craftable_item, origins=['http://localhost:8080', 'https://sdv-resource-calculator.vercel.app/'], supports_credentials=True)
 app.register_blueprint(craftable_item, url_prefix='/api/v1/craftable-items')
+
+
+if 'ON_HEROKU' in os.environ: 
+  models.initialize()
 
 
 if __name__ == '__main__':
