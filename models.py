@@ -402,7 +402,7 @@ def createdb():
 
 
 def initialize():
-  DATABASE.connect()
+  # DATABASE.connect()
   DATABASE.create_tables([CraftableItems], safe=True)
   print("TABLES Created")
-  DATABASE.close()
+  # DATABASE.close()
