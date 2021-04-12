@@ -26,11 +26,11 @@ def after_request(response):
   return response
 
 
-CORS(craftable_item, origins=['http://localhost:8080'], supports_credentials=True)
+CORS(craftable_item, origins=['http://localhost:8080', 'https://sdv-resource-calculator-oya9cejq8-kirstengreen.vercel.app/'], supports_credentials=True)
 app.register_blueprint(craftable_item, url_prefix='/api/v1/craftable-items')
 
 
 if __name__ == '__main__':
   models.initialize()
-  # models.createdb()
+  models.createdb()
   app.run(debug=DEBUG, port=PORT)
