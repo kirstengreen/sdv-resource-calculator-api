@@ -1,5 +1,6 @@
 import os
-from flask import Flask, g
+import psycopg2
+from flask import Flask, jsonify, g
 from flask_cors import CORS
 import models
 from resources.craftable_items import craftable_item
@@ -9,6 +10,11 @@ PORT = 5000
 
 
 app = Flask(__name__)
+
+
+DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 '''
@@ -33,7 +39,7 @@ app.register_blueprint(craftable_item, url_prefix='/api/v1/craftable-items')
 
 if 'ON_HEROKU' in os.environ: 
   models.initialize()
-  models.createdb()
+  # models.createdb()
 
 
 if __name__ == '__main__':
