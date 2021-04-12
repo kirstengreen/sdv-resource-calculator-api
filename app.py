@@ -38,5 +38,5 @@ if 'ON_HEROKU' in os.environ:
 
 if __name__ == '__main__':
   models.initialize()
-  # models.createdb()
+  models.createdb()
   app.run(debug=DEBUG, port=PORT)

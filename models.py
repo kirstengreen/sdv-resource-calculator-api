@@ -1,5 +1,5 @@
 import os
-from peewee import CharField, DateTimeField, Model, DoesNotExist
+from peewee import CharField, DateTimeField, Model, DoesNotExist, fn
 from playhouse.postgres_ext import PostgresqlExtDatabase, JSONField
 from datetime import datetime
 from playhouse.db_url import connect
@@ -397,12 +397,14 @@ data_source = [
 
 
 def createdb():
-  for data_dict in data_source:
-    CraftableItems.create(**data_dict)
+  num_records = (CraftableItems.select())
+  if len(num_records) < len(data_source):
+    for data_dict in data_source:
+      CraftableItems.create(**data_dict)
 
 
 def initialize():
-  # DATABASE.connect()
+  DATABASE.connect()
   DATABASE.create_tables([CraftableItems], safe=True)
   print("TABLES Created")
-  # DATABASE.close()
+  DATABASE.close()
