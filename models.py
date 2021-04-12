@@ -396,7 +396,7 @@ data_source = [
 }]
 
 
-def createdb():
+def create_craftable_items_row():
   num_records = (CraftableItems.select())
   if len(num_records) < len(data_source):
     for data_dict in data_source:

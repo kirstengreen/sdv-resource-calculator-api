@@ -33,10 +33,10 @@ app.register_blueprint(craftable_item, url_prefix='/api/v1/craftable-items')
 
 if 'ON_HEROKU' in os.environ: 
   models.initialize()
-  models.createdb()
+  models.create_craftable_items_row()
 
 
 if __name__ == '__main__':
   models.initialize()
-  models.createdb()
+  models.create_craftable_items_row()
   app.run(debug=DEBUG, port=PORT)
