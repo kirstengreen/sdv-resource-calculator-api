@@ -27,7 +27,7 @@ def after_request(response):
   return response
 
 
-CORS(craftable_item, origins=['http://localhost:8080', 'https://sdv-resource-calculator.vercel.app/'], supports_credentials=True)
+CORS(craftable_item, origins=['http://localhost:8080', 'https://sdv-resource-calculator.vercel.app/'], supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
 app.register_blueprint(craftable_item, url_prefix='/api/v1/craftable-items')
 
 
